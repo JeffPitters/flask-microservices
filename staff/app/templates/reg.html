@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+  <title>Staff registry</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/index.css') }}">
+</head>
+<body>
+<div class="wrapper">
+  <form class="centerform" id="mainform" action="" method="post" name="reg">
+    {{form.hidden_tag()}}
+    <div class="container"><span class="back"><a href="#">Вернуться на главную</a></span></div>
+    <div class="container" id="maindiv">
+      <div class="group">
+        {{form.adder_name}}
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <br>{% for error in form.errors.adder_name %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+        <label><b>Имя добавляющего</b></label>
+      </div>
+
+      <div class="group">
+        {{form.adder_psw}}
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <br>{% for error in form.errors.adder_psw %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+        <label><b>Пароль добавляющего</b></label>
+      </div>
+
+      <div class="group">
+        {{form.uname}}
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <br>{% for error in form.errors.uname %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+        <label><b>Имя пользователя</b></label>
+      </div>
+
+      <div class="group">
+        {{form.psw}}
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <br>{% for error in form.errors.psw %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+        <label><b>Пароль</b></label>
+      </div>
+
+      <div class="group">
+        {{form.rep_psw}}
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <br>{% for error in form.errors.rep_psw %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+        <label><b>Повторите пароль</b></label>
+      </div>
+
+      <div class="group">
+        {{form.rights}}
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <br>{% for error in form.errors.rights %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+        <label><b>Права сотрудника</b></label>
+      </div>
+
+      <div class="fields2" id="submitgroup">
+        <button class="enter" type="submit">Подтвердить</button>
+      </div>
+    </div>
+
+    <div class="container" id="optional">
+      <span id="reg"><a href="index.html">Логин</a></span>
+      <span id="psw"><a href="#">Забыли пароль?</a></span>
+    </div>
+  </form>
+</div>
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+    {% for message in messages %}
+        <li>{{ message }} </li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+</body>
+</html>

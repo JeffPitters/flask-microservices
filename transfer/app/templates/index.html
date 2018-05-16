@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+  <title>Index</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/index.css') }}">
+</head>
+<body>
+  <script>window.onload = function(){
+  var text = '{{ t }}';
+  localStorage.setItem('token', text);}</script>
+
+    <div class="container">
+      <span id="user"><a href="{{ url_for('add') }}">Добавить на склад</a></span>
+      <span id="staff"><a href="{{ url_for('remove') }}">Отправить со склада</a></span>
+    </div>
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+    {% for message in messages %}
+        <li>{{ message }} </li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+</body>
+</html>

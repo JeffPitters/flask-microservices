@@ -1,0 +1,151 @@
+body {
+  background: #000022;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  color: #8585ad;
+  font: inherit;
+}
+
+* { 
+  box-sizing: border-box; 
+}
+
+body, html {
+  height: 100%;
+  display: grid;
+}
+
+/*css grid*/
+.container {
+  border: 2px #8585ad solid;
+  border-radius: 10px;
+  margin: auto;
+  padding: 10px;
+}
+
+.wrapper {
+  display: grid;
+  justify-items: center;
+  grid-template-areas: 
+    ". . . ."
+    ". a a ."
+    ". a a ."
+    ". . . .";
+}
+
+.centerform {
+  margin: auto;
+  grid-area: a;
+  grid-column: 2 / -2;
+}
+
+/*link highlight*/
+a:link, a:visited {
+  border-radius: 20px;
+  background-color: #8585ad;
+  color: #000022  ;
+  padding: 14px 25px;
+  text-align: center; 
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:hover, a:active {
+  background-color: #000022;
+  color: #8585ad;
+}
+
+.enter {
+  border: solid;
+  border-radius: 10px;
+  color: #8585ad;
+  background-color: #000022  ;
+  padding: 14px 25px;
+  text-align: center; 
+  text-decoration: none;
+  display: inline-block;
+}
+
+#reg {
+  margin-left: 5px;
+}
+
+.fields2 {
+  margin-top: 5%;
+}
+
+.group { 
+  margin-top: 5%;
+  position:relative; 
+  margin-bottom:45px; 
+}
+
+input {
+  background: #000022;
+  color: #8585ad;
+  font-size:16px;
+  padding:10px 10px 10px 5px;
+  display:block;
+  width:300px;
+  border:none;
+  border-bottom:1px solid #8585ad;
+  border-radius: 10px;
+}
+
+input:focus { outline:none; }
+
+label {
+  color:#8585ad; 
+  font-size:18px;
+  font-weight:normal;
+  position:absolute;
+  left:5px;
+  top:10px;
+}
+
+input ~ label, input:valid ~ label {
+  top:-20px;
+  font-size:16px;
+}
+
+.bar { 
+  position:relative; 
+  display:block; 
+  width:300px; 
+}
+
+.bar:before, .bar:after {
+  content:'';
+  height:2px; 
+  width:0;
+  bottom:1px; 
+  position:absolute;
+  background:#8585ad; 
+  transition:0.2s ease all; 
+  -moz-transition:0.2s ease all; 
+  -webkit-transition:0.2s ease all;
+}
+
+.bar:before {
+  left:45%;
+}
+
+.bar:after {
+  right:45%; 
+}
+
+/* active state */
+input:focus ~ .bar:before, input:focus ~ .bar:after {
+  width:50%;
+}
+
+.highlight {
+  position:absolute;
+  height:60%; 
+  width:100px; 
+  top:25%; 
+  left:0;
+  pointer-events:none;
+  opacity:0.5;
+}

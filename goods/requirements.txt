@@ -1,0 +1,10 @@
+requests
+gunicorn
+Flask
+Flask-Login
+SQLAlchemy
+Flask-SQLAlchemy
+WTForms
+Flask-WhooshAlchemy
+Flask-WTF
+jwcrypto

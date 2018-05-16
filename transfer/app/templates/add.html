@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+  <title>Add</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/index.css') }}">
+</head>
+<body>
+<div class="wrapper">
+  <form class="centerform" id="mainform" action="" method="post" name="add">
+    {{form.hidden_tag()}}
+    <div class="container" id="maindiv">
+      <div class="group" id="namegroup">
+        {{form.supplyer}}
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <br>{% for error in form.errors.supplyer %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+        <label><b>Поставщик</b></label>
+      </div>
+
+      <div class="group">
+        {{form.title}}
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <br>{% for error in form.errors.title %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+        <label><b>Название товара</b></label>
+      </div>
+
+     <div class="group" id="countgroup">
+        {{form.count}}
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <br>{% for error in form.errors.count %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+        <label><b>Количество</b></label>
+      </div>
+
+      <div class="group" id="namegroup">
+        {{form.staffname}}
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <br>{% for error in form.errors.staffname %}
+        <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+        <label><b>Имя сотрудника</b></label>
+      </div>
+     
+      <div class="fields2" id="submitgroup">
+        <button class="enter" type="submit">Подтвердить</button>
+      </div>
+    </div>
+
+    <div class="container" id="optional">
+      <span id="reg"><a <a href="{{ url_for('remove') }}">Отправка</a></span>
+      <span id="psw"><a href="#">Забыли пароль?</a></span>
+    </div>
+  </form>
+</div>
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+    {% for message in messages %}
+        <li>{{ message }} </li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+</body>
+</html>

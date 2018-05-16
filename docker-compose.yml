@@ -1,0 +1,122 @@
+version: "3"
+services:
+  consul:
+    image: consul
+    container_name: consul
+    ports:
+      - "8500:8500"
+      - "53:53/udp"
+    networks:
+      - net
+    command: 
+      consul --agent --bootstrap
+
+  registrator:
+    image: enpassant/registrator
+    container_name: registrator
+    networks:
+      - net
+    volumes:
+        - /var/run/docker.sock:/tmp/docker.sock
+    command: 
+      consul://localhost:8500
+    
+  staff-server:
+    image: nginx
+    volumes:
+      - ./staff/server:/etc/nginx/conf.d
+      - ./staff/app/static:/app/static
+    ports:
+      - "6004:80"
+    container_name: staff-server
+    networks:
+      - net
+
+  staff:
+    build: ./staff
+    working_dir: /usr/src/myapp
+    expose:
+      - "8000"
+    volumes:
+      - ./staff:/usr/src/myapp
+    container_name: staff
+    networks:
+      - net
+    command: 
+      gunicorn run:app --backlog 10 -b :8000 --name staff
+
+  customers-server:
+    image: nginx
+    volumes:
+      - ./customers/server:/etc/nginx/conf.d
+      - ./customers/app/static:/app/static
+    ports:
+      - "6001:80"
+    container_name: customers-server
+    networks:
+      - net
+
+  customers:
+    build: ./customers
+    working_dir: /usr/src/myapp
+    expose:
+      - "8000"
+    volumes:
+      - ./customers:/usr/src/myapp
+    container_name: customers
+    networks:
+      - net
+    command: 
+      gunicorn run:app --backlog 10 -b :8000 --name customers
+
+  goods-server:
+    image: nginx
+    volumes:
+      - ./goods/server:/etc/nginx/conf.d
+      - ./goods/app/static:/app/static
+    ports:
+      - "6002:80"
+    container_name: goods-server
+    networks:
+      - net
+
+  goods:
+    build: ./goods
+    working_dir: /usr/src/myapp
+    expose:
+      - "8000"
+    volumes:
+      - ./goods:/usr/src/myapp
+    container_name: goods
+    networks:
+      - net
+    command: 
+      gunicorn run:app --backlog 10 -b :8000 --name goods
+
+  transfer-server:
+    image: nginx
+    volumes:
+      - ./transfer/server:/etc/nginx/conf.d
+      - ./transfer/app/static:/app/static
+    ports:
+      - "6003:80"
+    container_name: transfer-server
+    networks:
+      - net
+
+  transfer:
+    build: ./transfer
+    working_dir: /usr/src/myapp
+    expose:
+      - "8000"
+    volumes:
+      - ./transfer:/usr/src/myapp
+    container_name: transfer
+    networks:
+      - net
+    command: 
+      gunicorn run:app --backlog 10 -b :8000 --name transfer
+
+networks:
+  net:
+    driver: bridge
